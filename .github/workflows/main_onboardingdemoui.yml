@@ -30,7 +30,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: node-app
-          path: .
+          path: ./dist/myangularapp
 
   deploy:
     runs-on: ubuntu-latest
@@ -44,6 +44,7 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: node-app
+          path: ./dist/myangularapp
 
       - name: 'Deploy to Azure Web App'
         id: deploy-to-webapp
@@ -52,4 +53,4 @@ jobs:
           app-name: 'onboardingdemoui'
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_23CE619FFA0E41348716E782C864734E }}
-          package: .
+          package: ./dist/myangularapp
